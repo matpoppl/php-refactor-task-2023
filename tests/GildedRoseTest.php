@@ -2,10 +2,8 @@
 
 namespace App;
 
+use App\Updater\Manager\UpdaterManagerInterface;
 use PHPUnit\Framework\TestCase;
-use App\Updater\Manager\UpdaterManager;
-use App\Updater\Factory\UpdaterFactory;
-use App\Updater\Result\ResultFactory;
 
 class GildedRoseTest extends TestCase
 {
@@ -22,7 +20,8 @@ class GildedRoseTest extends TestCase
     {
         $item = new Item($name, $sellIn, $quality);
 
-        $updaterManager = new UpdaterManager(new UpdaterFactory(new ResultFactory()));
+        $app = AppSingleton::getInstance();
+        $updaterManager = $app->getService(UpdaterManagerInterface::class);
         
         $gildedRose = new GildedRose($updaterManager);
         $gildedRose->updateQuality($item);
