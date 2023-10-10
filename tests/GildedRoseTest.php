@@ -1,13 +1,17 @@
 <?php
 
-use App\GildedRose;
-use App\Item;
+namespace App;
+
 use PHPUnit\Framework\TestCase;
+use App\Updater\Manager\UpdaterManager;
+use App\Updater\Factory\UpdaterFactory;
+use App\Updater\Result\ResultFactory;
 
 class GildedRoseTest extends TestCase
 {
     /**
      * @dataProvider itemsProvider
+     * @covers App\Updater\Manager\UpdaterManager
      * @param string $name
      * @param int $sellIn
      * @param int $quality
@@ -18,7 +22,9 @@ class GildedRoseTest extends TestCase
     {
         $item = new Item($name, $sellIn, $quality);
 
-        $gildedRose = new GildedRose();
+        $updaterManager = new UpdaterManager(new UpdaterFactory(new ResultFactory()));
+        
+        $gildedRose = new GildedRose($updaterManager);
         $gildedRose->updateQuality($item);
 
         $this->assertEquals($expectedSellIn, $item->sell_in);
