@@ -19,7 +19,15 @@ class UpdaterFactoryTest extends TestCase
     public function testCreateUpdater(string $name, string $expected)
     {
         $resultFactory = $this->getMockBuilder(ResultFactoryInterface::class)->getMock();
-        $factory = new UpdaterFactory($resultFactory);
+        $factory = new UpdaterFactory($resultFactory, [
+            'default_updater' => StandardUpdater::class,
+            'aliases' => [
+                'Sulfuras, Hand of Ragnaros' => SulfurasUpdater::class,
+                'Aged Brie' => AgedBrieUpdater::class,
+                'Backstage passes to a TAFKAL80ETC concert' => BackstageTAFKAL80ETCUpdater::class,
+            ],
+        ]);
+        
         self::assertInstanceOf($expected, $factory->createUpdater($name));
     }
     

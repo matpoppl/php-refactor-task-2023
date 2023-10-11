@@ -3,8 +3,18 @@
 use App\Updater\Factory;
 use App\Updater\Manager;
 use App\Updater\Result;
+use App\Updater;
 
 return [
+    Factory\UpdaterFactoryFactory::SERVICE_CONFIG_KEY => [
+        'default_updater' => Updater\StandardUpdater::class,
+        'aliases' => [
+            'Sulfuras, Hand of Ragnaros' => Updater\SulfurasUpdater::class,
+            'Aged Brie' => Updater\AgedBrieUpdater::class,
+            'Backstage passes to a TAFKAL80ETC concert' => Updater\BackstageTAFKAL80ETCUpdater::class,
+        ],
+    ],
+    
     'service_manager' => [
         'aliases' => [
             'updater.result.factory' => Result\ResultFactoryInterface::class,
