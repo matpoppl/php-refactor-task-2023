@@ -11,13 +11,13 @@ class ResultFactoryTest extends TestCase
      * @param string $name
      * @param string $expected
      */
-    public function testCreateUpdater(int $sell_in, int $quality)
+    public function testCreateUpdater(int $sellIn, int $quality)
     {
         $factory = new ResultFactory();
-        $result = $factory->createResult($sell_in, $quality);
+        $result = $factory->createResult($sellIn, $quality);
         
         self::assertInstanceOf(ResultInterface::class, $result);
-        self::assertEquals($sell_in, $result->getSellIn());
+        self::assertEquals($sellIn, $result->getSellIn());
         self::assertEquals($quality, $result->getQuality());
     }
     

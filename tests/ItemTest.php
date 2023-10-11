@@ -11,7 +11,7 @@ class ItemTest extends TestCase
         $item = new Item('foo', 123, 456);
         
         $this->assertEquals('foo', $item->name);
-        $this->assertEquals(123, $item->sell_in);
+        $this->assertEquals(123, $item->sellIn);
         $this->assertEquals(456, $item->quality);
         
         $this->assertEquals('foo, 123, 456', '' . $item);

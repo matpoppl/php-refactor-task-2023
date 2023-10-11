@@ -11,11 +11,11 @@ class ResultTest extends TestCase
      * @param string $name
      * @param string $expected
      */
-    public function testCreateUpdater(int $sell_in, int $quality)
+    public function testCreateUpdater(int $sellIn, int $quality)
     {
-        $result = new Result($sell_in, $quality);
+        $result = new Result($sellIn, $quality);
         self::assertInstanceOf(ResultInterface::class, $result);
-        self::assertEquals($sell_in, $result->getSellIn());
+        self::assertEquals($sellIn, $result->getSellIn());
         self::assertEquals($quality, $result->getQuality());
     }
     
