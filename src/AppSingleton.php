@@ -7,19 +7,23 @@ use App\ServiceManager\ServiceManager;
 
 class AppSingleton
 {
-    public static function getInstance(): static
+    public static function getInstance(): self
     {
         static $instance = null;
 
         if (null === $instance) {
             $configPath = $_ENV['APP_CONFIG_PATH'] ?? __DIR__ . '/../configs/app.php';
-            $instance = static::createNew(require($configPath));
+            if (! file_exists($configPath)) {
+                throw new \UnexpectedValueException("Config file `{$configPath}` dont exists");
+            }
+            $config = require $configPath;
+            $instance = static::createNew($config);
         }
 
         return $instance;
     }
 
-    public static function createNew(array $config): static
+    public static function createNew(array $config): self
     {
         if (array_key_exists('service_manager', $config)) {
             $options = $config['service_manager'];
@@ -30,7 +34,7 @@ class AppSingleton
 
         $serviceManager = new ServiceManager($options);
         $serviceManager->setService('config', $config);
-        return new static($serviceManager);
+        return new self($serviceManager);
     }
 
     private function __construct(private ServiceManagerInterface $serviceManager)
