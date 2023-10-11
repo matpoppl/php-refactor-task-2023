@@ -4,5 +4,5 @@ namespace App\Updater\Result;
 
 interface ResultFactoryInterface
 {
-    public function createResult(int $sell_in, int $quality): ResultInterface;
+    public function createResult(int $sellIn, int $quality): ResultInterface;
 }

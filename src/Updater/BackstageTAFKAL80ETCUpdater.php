@@ -6,13 +6,13 @@ use App\Updater\Result\ResultInterface;
 
 class BackstageTAFKAL80ETCUpdater extends AbstractUpdater
 {
-    public function update(int $sell_in, int $quality): ResultInterface
+    public function update(int $sellIn, int $quality): ResultInterface
     {
-        if ($sell_in < 1) {
+        if ($sellIn < 1) {
             $quality = 0;
-        } elseif ($sell_in > 0 && $sell_in < 6) {
+        } elseif ($sellIn > 0 && $sellIn < 6) {
             $quality += 3;
-        } elseif ($sell_in > 5 && $sell_in < 11) {
+        } elseif ($sellIn > 5 && $sellIn < 11) {
             $quality += 2;
         } else {
             $quality += 1;
@@ -22,8 +22,8 @@ class BackstageTAFKAL80ETCUpdater extends AbstractUpdater
             $quality = 50;
         }
 
-        $sell_in--;
+        $sellIn--;
 
-        return $this->resultFactory->createResult($sell_in, $quality);
+        return $this->resultFactory->createResult($sellIn, $quality);
     }
 }

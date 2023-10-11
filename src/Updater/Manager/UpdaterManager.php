@@ -14,9 +14,9 @@ class UpdaterManager implements UpdaterManagerInterface
     public function update(Item $item): void
     {
         $updater = $this->updaterFactory->createUpdater($item->name);
-        $result = $updater->update($item->sell_in, $item->quality);
+        $result = $updater->update($item->sellIn, $item->quality);
 
-        $item->sell_in = $result->getSellIn();
+        $item->sellIn = $result->getSellIn();
         $item->quality = $result->getQuality();
     }
 }

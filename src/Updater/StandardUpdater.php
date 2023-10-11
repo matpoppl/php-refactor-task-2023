@@ -6,9 +6,9 @@ use App\Updater\Result\ResultInterface;
 
 class StandardUpdater extends AbstractUpdater
 {
-    public function update(int $sell_in, int $quality): ResultInterface
+    public function update(int $sellIn, int $quality): ResultInterface
     {
-        if ($sell_in < 1) {
+        if ($sellIn < 1) {
             $quality -= 2;
         } else {
             $quality -= 1;
@@ -18,8 +18,8 @@ class StandardUpdater extends AbstractUpdater
             $quality = 0;
         }
 
-        $sell_in--;
+        $sellIn--;
 
-        return $this->resultFactory->createResult($sell_in, $quality);
+        return $this->resultFactory->createResult($sellIn, $quality);
     }
 }
